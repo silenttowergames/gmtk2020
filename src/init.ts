@@ -13,20 +13,39 @@ import { AIPlayerSystem } from "./ecs/systems/AIPlayerSystem";
 
 function init() : void
 {
-    const c : canvas = canvas.create('c', 160, 90);
+    const c : canvas = canvas.create('c', 320, 180);
     
     let w : world;
     
     const spriteSheets : Array<SpriteSheet> = [
-        SpriteSheet.create("easter-16x16", v2d.create(16, 16), {
+        SpriteSheet.create("8x8", v2d.create(8, 8), {
             protagIdle: [
-                [ 6, 0, 10, ],
-                [ 5, 0, 10, ],
+                [ 0, 0, 10, ],
+                [ 1, 0, 10, ],
             ],
             
-            bunnyIdle: [
-                [ 0, 0, 15, ],
-                [ 1, 0, 15, ],
+            weed: [
+                [ 2, 1, 15, ],
+                [ 3, 1, 15, ],
+                [ 0, 2, 15, ],
+                [ 1, 2, 15, ],
+            ],
+            
+            corn: [
+                [ 2, 2, 0, ],
+            ],
+            
+            fire: [
+                [ 0, 3, 5, ],
+                [ 1, 3, 5, ],
+                [ 2, 3, 5, ],
+                [ 3, 3, 5, ],
+            ],
+        }),
+        
+        SpriteSheet.create("endcard", v2d.create(320, 180), {
+            only: [
+                [ 0, 0, 0, ],
             ],
         }),
     ];
@@ -40,7 +59,7 @@ function init() : void
             
             entity = w.new();
             w.add(entity, body.create(64, 64));
-            w.add(entity, sprite.create(spriteSheets[0], 'bunnyIdle'));
+            w.add(entity, sprite.create(spriteSheets[0], 'fire'));
         },
     };
     
@@ -86,3 +105,8 @@ function newWorld(c : canvas) : world
 }
 
 window.addEventListener('load', init);
+
+window.addEventListener('tilemap', function()
+{
+    console.log(window['maps']);
+});

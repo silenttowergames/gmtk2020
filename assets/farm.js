@@ -1,0 +1,90 @@
+(function(name,data){
+ if(typeof onTileMapLoaded === 'undefined') {
+  if(typeof TileMaps === 'undefined') TileMaps = {};
+  TileMaps[name] = data;
+ } else {
+  onTileMapLoaded(name,data);
+ }
+ if(typeof module === 'object' && module && module.exports) {
+  module.exports = data;
+ }})("farm",
+{ "compressionlevel":-1,
+ "height":21,
+ "infinite":false,
+ "layers":[
+        {
+         "compression":"zstd",
+         "data":"KLUv\/WAgDF0AACARAAAAAQAZ3XdE",
+         "encoding":"base64",
+         "height":21,
+         "id":1,
+         "name":"bg",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":40,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "compression":"zstd",
+         "data":"KLUv\/WAgDE0AABAAAAEAG\/UBFg==",
+         "encoding":"base64",
+         "height":21,
+         "id":2,
+         "name":"fg",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":40,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"obj",
+         "objects":[
+                {
+                 "gid":1,
+                 "height":8,
+                 "id":1,
+                 "name":"",
+                 "rotation":0,
+                 "type":"farmer",
+                 "visible":true,
+                 "width":8,
+                 "x":88,
+                 "y":80
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":4,
+ "nextobjectid":2,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.4.1",
+ "tileheight":8,
+ "tilesets":[
+        {
+         "columns":4,
+         "firstgid":1,
+         "image":"8x8.png",
+         "imageheight":40,
+         "imagewidth":32,
+         "margin":0,
+         "name":"8x8",
+         "spacing":0,
+         "tilecount":20,
+         "tileheight":8,
+         "tilewidth":8
+        }],
+ "tilewidth":8,
+ "type":"map",
+ "version":1.4,
+ "width":40
+});

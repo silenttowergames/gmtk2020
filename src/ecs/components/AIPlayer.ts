@@ -7,5 +7,5 @@ export class AIPlayer extends component
         return 'AIPlayer';
     }
     
-    speed : number = 1;
+    speed : number = 8;
 }

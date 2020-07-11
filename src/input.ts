@@ -29,7 +29,7 @@ export class input
         }
         else
         {
-            input.keys.held[key] = Math.min(Math.max(1, input.keys.held[key] + 1), 80);
+            input.keys.held[key] = Math.max(1, input.keys.held[key] + 1);
         }
     }
     
@@ -43,7 +43,7 @@ export class input
             }
             else
             {
-                input.keys.down[key] = Math.min(Math.max(1, input.down(key) + 1), 80);
+                input.keys.down[key] = Math.max(1, input.down(key) + 1);
             }
         }
     }
