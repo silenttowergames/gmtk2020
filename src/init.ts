@@ -10,6 +10,7 @@ import { input } from "./input";
 import { MoveSystem } from "./ecs/systems/MoveSystem";
 import { AIPlayer } from "./ecs/components/AIPlayer";
 import { AIPlayerSystem } from "./ecs/systems/AIPlayerSystem";
+import { TileMap } from "./ecs/components/TileMap";
 
 function init() : void
 {
@@ -19,9 +20,12 @@ function init() : void
     
     const spriteSheets : Array<SpriteSheet> = [
         SpriteSheet.create("8x8", v2d.create(8, 8), {
-            protagIdle: [
-                [ 0, 0, 10, ],
-                [ 1, 0, 10, ],
+            protagLeft: [
+                [ 0, 0, 0, ],
+            ],
+            
+            protagRight: [
+                [ 1, 0, 0, ],
             ],
             
             weed: [
@@ -52,13 +56,19 @@ function init() : void
     
     const scenes = {
         firstScene: () => {
-            let entity : number = w.new();
-            w.add(entity, new AIPlayer());
-            w.add(entity, body.create(32, 16));
-            w.add(entity, sprite.create(spriteSheets[0], 'protagIdle'));
+            let entity : number;
             
             entity = w.new();
-            w.add(entity, body.create(64, 64));
+            w.add(entity, TileMap.create('farm'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(0, 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(16, 12));
             w.add(entity, sprite.create(spriteSheets[0], 'fire'));
         },
     };
@@ -105,8 +115,3 @@ function newWorld(c : canvas) : world
 }
 
 window.addEventListener('load', init);
-
-window.addEventListener('tilemap', function()
-{
-    console.log(window['maps']);
-});
