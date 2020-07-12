@@ -285,7 +285,7 @@ function init() : void
             
             entity = w.new();
             w.add(entity, body.create(2, 2));
-            w.add(entity, TextC.create(`Carefuler!`, false));
+            w.add(entity, TextC.create(`Riverbow`, false));
             
             for(const o of window['maps'].farm9.layers[2].objects)
             {
@@ -314,7 +314,7 @@ function init() : void
             
             entity = w.new();
             w.add(entity, body.create(2, 2));
-            w.add(entity, TextC.create(`Carefuler!`, false));
+            w.add(entity, TextC.create(`Symmetry`, false));
             
             for(const o of window['maps'].farm10.layers[2].objects)
             {
@@ -343,7 +343,7 @@ function init() : void
             
             entity = w.new();
             w.add(entity, body.create(2, 2));
-            w.add(entity, TextC.create(`Carefuler!`, false));
+            w.add(entity, TextC.create(`Quadrants`, false));
             
             for(const o of window['maps'].farm11.layers[2].objects)
             {
@@ -701,7 +701,7 @@ function init() : void
     let nextScene = null;
     
     const loop = setInterval(() => {
-        if((w == null && (nextScene = 'farm11')) || (w.nextScene != null && (nextScene = w.nextScene)))
+        if((w == null && (nextScene = 'firstYearBible')) || (w.nextScene != null && (nextScene = w.nextScene)))
         {
             w = newWorld(c);
             
