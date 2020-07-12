@@ -689,7 +689,7 @@ function init() : void
             w.add(entity, body.create(8, 8));
             w.add(entity, TextC.create(""));
             w.add(entity, TextRead.create([
-                `THE END\n\nUntitled\n\nSilent Tower Games LLC\n\nMade for GMTK Jam 2020\n"Out Of Control"\n\nProgramming, Design, Art, Audio by\nRetro Swan\n\nPlaytested By\nJakabob247, TwoWholeWorms`,
+                `THE END\n\To Work With Your Own Hands\n\nSilent Tower Games LLC\n\nMade for GMTK Jam 2020\n"Out Of Control"\n\nProgramming, Design, Art, Audio by\nRetro Swan\n\nPlaytested By\nJakabob247, TwoWholeWorms`,
                 `Thanks For Playing! :)\n\nTwitter: @SilentTowerGame\n\nhttps://silent-tower-games.itch.io/\nhttps://silenttowergames.com/\nhttps://discord.silenttowergames.com/`
             ], null));
             
