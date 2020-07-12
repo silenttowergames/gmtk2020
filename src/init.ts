@@ -296,6 +296,64 @@ function init() : void
             }
         },
         
+        farm10: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm10'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(20 * 8, (8 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 232, 2));
+            w.add(entity, TextC.create(`Kerosene [V] Seed [X] Dig [C]`, false));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Carefuler!`, false));
+            
+            for(const o of window['maps'].farm10.layers[2].objects)
+            {
+                entity = w.new();
+                w.add(entity, body.create(o.x, (o.y) + 12 - 8));
+                w.add(entity, sprite.create(spriteSheets[0], 'weed'));
+                w.add(entity, new Weed());
+            }
+        },
+        
+        farm11: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm11'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(11 * 8, (4 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 232, 2));
+            w.add(entity, TextC.create(`Kerosene [V] Seed [X] Dig [C]`, false));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Carefuler!`, false));
+            
+            for(const o of window['maps'].farm11.layers[2].objects)
+            {
+                entity = w.new();
+                w.add(entity, body.create(o.x, (o.y) + 12 - 8));
+                w.add(entity, sprite.create(spriteSheets[0], 'weed'));
+                w.add(entity, new Weed());
+            }
+        },
+        
         firstYearStore: () => {
             let entity : number;
             
@@ -490,7 +548,7 @@ function init() : void
                `rAnd yet...\n\t\nYou knew exactly who I was,\nthe moment you saw me.`,
                `rDidn't you?`,
                `rHave a nice day.`,
-            ], 'farm12'));
+            ], 'farm11'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -643,7 +701,7 @@ function init() : void
     let nextScene = null;
     
     const loop = setInterval(() => {
-        if((w == null && (nextScene = 'farm9')) || (w.nextScene != null && (nextScene = w.nextScene)))
+        if((w == null && (nextScene = 'farm11')) || (w.nextScene != null && (nextScene = w.nextScene)))
         {
             w = newWorld(c);
             

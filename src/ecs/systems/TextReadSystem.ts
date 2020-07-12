@@ -59,7 +59,17 @@ export class TextReadSystem extends system
             
             if(t.message.length == message.length)
             {
-                if(input.down(' ') == 1)
+                if(
+                    input.down(' ') == 1
+                    ||
+                    input.down('x') == 1
+                    ||
+                    input.down('c') == 1
+                    ||
+                    input.down('v') == 1
+                    ||
+                    input.down('Enter') == 1
+                )
                 {
                     t.message = '';
                     r.messageID++;
