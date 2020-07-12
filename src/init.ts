@@ -696,12 +696,26 @@ function init() : void
             entity = w.new();
             w.add(entity, new Fader());
         },
+        
+        title: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, body.create(8, 8));
+            w.add(entity, TextC.create(""));
+            w.add(entity, TextRead.create([
+                `To Work With Your Own Hands\n\nGMTK Jam 2020\n\nPress Enter / X / C / V / Space`,
+            ], 'firstYearBible'));
+            
+            entity = w.new();
+            w.add(entity, new Fader());
+        },
     };
     
     let nextScene = null;
     
     const loop = setInterval(() => {
-        if((w == null && (nextScene = 'firstYearBible')) || (w.nextScene != null && (nextScene = w.nextScene)))
+        if((w == null && (nextScene = 'title')) || (w.nextScene != null && (nextScene = w.nextScene)))
         {
             w = newWorld(c);
             
