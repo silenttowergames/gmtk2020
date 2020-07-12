@@ -7,6 +7,7 @@ export class TileMap extends component
         const t = new TileMap();
         
         t.data = window['maps'][name];
+        window['tiles'].currentMap = name;
         
         let i = -1;
         for(const tile of t.data.layers[1].data)

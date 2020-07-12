@@ -142,6 +142,30 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
     "sourceSize": { "w": 8, "h": 8 },
     "duration": 100
+   },
+   "8x8 18.aseprite": {
+    "frame": { "x": 16, "y": 32, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 100
+   },
+   "8x8 19.aseprite": {
+    "frame": { "x": 24, "y": 32, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 100
+   },
+   "8x8 20.aseprite": {
+    "frame": { "x": 0, "y": 40, "w": 8, "h": 8 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 8, "h": 8 },
+    "sourceSize": { "w": 8, "h": 8 },
+    "duration": 100
    }
  },
  "meta": {
@@ -149,7 +173,7 @@
   "version": "1.2.21-x64",
   "image": "8x8.png",
   "format": "RGBA8888",
-  "size": { "w": 32, "h": 40 },
+  "size": { "w": 32, "h": 48 },
   "scale": "1",
   "frameTags": [
    { "name": "protagWalk", "from": 0, "to": 1, "direction": "forward" },

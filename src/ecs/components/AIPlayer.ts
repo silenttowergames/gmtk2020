@@ -7,5 +7,6 @@ export class AIPlayer extends component
         return 'AIPlayer';
     }
     
+    actNow : boolean = false;
     speed : number = 8;
 }

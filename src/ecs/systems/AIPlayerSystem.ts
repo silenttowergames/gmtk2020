@@ -16,6 +16,8 @@ export class AIPlayerSystem extends system
         
         for(const e of w.getEntitiesWith('AIPlayer'))
         {
+            let acted : boolean = false;
+            
             const a : AIPlayer = <AIPlayer>w.getComponentForEntity(+e, 'AIPlayer');
             const b : body = <body>w.getComponentForEntity(+e, 'body');
             const s : sprite = <sprite>w.getComponentForEntity(+e, 'sprite');
@@ -40,8 +42,58 @@ export class AIPlayerSystem extends system
                 b.velocity.Y -= a.speed;
             }
             
+            const ia = [
+                b.index - 1,
+                b.index + 0,
+                b.index + 1,
+                
+                b.index - 1 - 40,
+                b.index + 0 - 40,
+                b.index + 1 - 40,
+                
+                b.index - 1 + 40,
+                b.index + 0 + 40,
+                b.index + 1 + 40,
+            ];
+            
+            if(input.down('x') > 0)
+            {
+                for(const i of ia)
+                {
+                    if(window['maps'][window['tiles'].currentMap].layers[1].data[i] == 5)
+                    {
+                        window['maps'][window['tiles'].currentMap].layers[1].data[i] = 6;
+                        
+                        acted = true;
+                    }
+                }
+            }
+            
+            if(input.down('c') > 0)
+            {
+                for(const i of ia)
+                {
+                    if(
+                        window['maps'][window['tiles'].currentMap].layers[1].data[i] == 12
+                        ||
+                        window['maps'][window['tiles'].currentMap].layers[1].data[i] == 0
+                    )
+                    {
+                        window['maps'][window['tiles'].currentMap].layers[1].data[i] = 18;
+                        
+                        acted = true;
+                        
+                        a.actNow = false;
+                    }
+                }
+            }
+            
+            // c = kerosene
+            
             if(b.velocity.X != 0 || b.velocity.Y != 0)
             {
+                acted = true;
+                
                 if(s.animationID == 'protagLeft')
                 {
                     s.animationID = 'protagRight';
@@ -69,6 +121,56 @@ export class AIPlayerSystem extends system
                 if(b.velocity.Y > 0 && b.position.Y >= (180 - 8))
                 {
                     b.velocity.Y = 0;
+                }
+            }
+            
+            if(acted)
+            {
+                if(a.actNow)
+                {
+                    let i = -1;
+                    for(const w of window['maps'][window['tiles'].currentMap].layers[1].data)
+                    {
+                        i++;
+                        
+                        if(w != 4 && w != 19)
+                        {
+                            continue;
+                        }
+                        
+                        const wia = [
+                            i - 1,
+                            i + 0,
+                            i + 1,
+                            
+                            i + 0 - 40,
+                            
+                            i + 0 + 40,
+                        ];
+                        
+                        for(const j of wia)
+                        {
+                            if(window['maps'][window['tiles'].currentMap].layers[1].data[j] == 18)
+                            {
+                                window['maps'][window['tiles'].currentMap].layers[1].data[j] = 19;
+                            }
+                            else if(window['maps'][window['tiles'].currentMap].layers[1].data[j] == 6)
+                            {
+                                window['maps'][window['tiles'].currentMap].layers[1].data[j] = 11;
+                            }
+                        }
+                    }
+                }
+                
+                a.actNow = !a.actNow;
+                
+                if(
+                    (window['maps'][window['tiles'].currentMap].layers[1].data.indexOf(5) == -1)
+                    &&
+                    (window['maps'][window['tiles'].currentMap].layers[1].data.indexOf(6) == -1)
+                )
+                {
+                    w.nextScene = 'secondScene';
                 }
             }
         }

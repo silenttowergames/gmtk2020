@@ -5,6 +5,7 @@ import { body } from "../components/body";
 import { v2d } from "../../v2d";
 import { TileMap } from "../components/TileMap";
 import { i } from "../../i";
+import { TextC } from "../components/TextC";
 
 export class DrawSystem extends system
 {
@@ -68,8 +69,8 @@ export class DrawSystem extends system
         
         for(const e of w.getEntitiesWith('sprite'))
         {
-            const s : sprite = <sprite>w.getComponentForEntity(e, 'sprite');
             const b : body = <body>w.getComponentForEntity(e, 'body');
+            const s : sprite = <sprite>w.getComponentForEntity(e, 'sprite');
             
             const frame : v2d = v2d.create(
                 s.sheet.animations[s.animationID][s.frameID][0],
@@ -91,10 +92,16 @@ export class DrawSystem extends system
         
         w.canvas.ctx.font = `${zoom * 8}px PressStart2P`;
         w.canvas.ctx.fillStyle = '#999';
-        w.canvas.ctx.fillText(
-            'Spring 1953',
-            2 * zoom,
-            10 * zoom
-        );
+        for(const e of w.getEntitiesWith('TextC'))
+        {
+            const b : body = <body>w.getComponentForEntity(e, 'body');
+            const t : TextC = <TextC>w.getComponentForEntity(e, 'TextC');
+            
+            w.canvas.ctx.fillText(
+                t.message,
+                b.position.X * zoom,
+                (b.position.Y + 8) * zoom
+            );
+        }
     }
 }
