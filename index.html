@@ -26,11 +26,36 @@ function onTileMapLoaded(name, data)
 <script type="text/javascript" src="assets/farm2.js"></script>
 <script type="text/javascript" src="assets/farm3.js"></script>
 <script type="text/javascript">
+// Playtesters:
+// - Jakabob247
+// - TwoWholeWorms
+
 window.sounds = {
+    dig: new Howl({ src: [ 'assets/dig.ogg', ], }),
+    
+    plant0: new Howl({ src: [ 'assets/plant0.ogg', ], }),
+    plant1: new Howl({ src: [ 'assets/plant1.ogg', ], }),
+    plant2: new Howl({ src: [ 'assets/plant2.ogg', ], }),
+    
+    /*
+    text0: new Howl({ src: [ 'assets/text0.ogg', ], }),
+    text1: new Howl({ src: [ 'assets/text1.ogg', ], }),
+    text2: new Howl({ src: [ 'assets/text2.ogg', ], }),
+    */
+   
+    text0: new Howl({ src: [ 'assets/blip0.wav', ], }),
+    text1: new Howl({ src: [ 'assets/blip1.wav', ], }),
+    text2: new Howl({ src: [ 'assets/blip2.wav', ], }),
+    
+    text3: new Howl({ src: [ 'assets/blip3.wav', ], }),
+    text4: new Howl({ src: [ 'assets/blip4.wav', ], }),
+    text5: new Howl({ src: [ 'assets/blip5.wav', ], }),
+    
+    water: new Howl({ src: [ 'assets/water.ogg', ], }),
     won: new Howl({ src: [ 'assets/win.ogg', ], }),
 };
 
-Howler.volume(0.25);
+Howler.volume(0.5);
 </script>
 <style type="text/css">
 @font-face {
@@ -61,5 +86,7 @@ img {
 <canvas id="c"></canvas>
 <img src="assets/8x8.png">
 <img src="assets/endcard.png">
+<img src="assets/store.png">
+<img src="assets/store2.png">
 </body>
 </html>

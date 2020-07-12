@@ -17,6 +17,8 @@ export class AIPlayerSystem extends system
         for(const e of w.getEntitiesWith('AIPlayer'))
         {
             let acted : boolean = false;
+            let dug : boolean = false;
+            let water : boolean = false;
             
             const a : AIPlayer = <AIPlayer>w.getComponentForEntity(+e, 'AIPlayer');
             const b : body = <body>w.getComponentForEntity(+e, 'body');
@@ -65,6 +67,8 @@ export class AIPlayerSystem extends system
                         window['maps'][window['tiles'].currentMap].layers[1].data[i] = 6;
                         
                         acted = true;
+                        
+                        dug = true;
                     }
                 }
             }
@@ -89,6 +93,11 @@ export class AIPlayerSystem extends system
             }
             
             // c = kerosene
+            
+            if(dug)
+            {
+                window['sounds'][`plant${Math.round(Math.random() * 2)}`].play();
+            }
             
             if(b.velocity.X != 0 || b.velocity.Y != 0)
             {
@@ -153,10 +162,14 @@ export class AIPlayerSystem extends system
                             if(window['maps'][window['tiles'].currentMap].layers[1].data[j] == 18)
                             {
                                 window['maps'][window['tiles'].currentMap].layers[1].data[j] = 19;
+                                
+                                water = true;
                             }
                             else if(window['maps'][window['tiles'].currentMap].layers[1].data[j] == 6)
                             {
                                 window['maps'][window['tiles'].currentMap].layers[1].data[j] = 11;
+                                
+                                water = true;
                             }
                         }
                     }
@@ -174,6 +187,11 @@ export class AIPlayerSystem extends system
                     
                     window['sounds'].won.play();
                 }
+            }
+            
+            if(water)
+            {
+                //window['sounds'].water.play();
             }
         }
     }

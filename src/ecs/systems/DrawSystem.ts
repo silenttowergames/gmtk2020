@@ -6,6 +6,7 @@ import { v2d } from "../../v2d";
 import { TileMap } from "../components/TileMap";
 import { i } from "../../i";
 import { TextC } from "../components/TextC";
+import { Fader } from "../components/Fader";
 
 export class DrawSystem extends system
 {
@@ -91,16 +92,55 @@ export class DrawSystem extends system
         }
         
         w.canvas.ctx.font = `${zoom * 8}px PressStart2P`;
-        w.canvas.ctx.fillStyle = '#999';
         for(const e of w.getEntitiesWith('TextC'))
         {
             const b : body = <body>w.getComponentForEntity(e, 'body');
             const t : TextC = <TextC>w.getComponentForEntity(e, 'TextC');
             
-            w.canvas.ctx.fillText(
-                t.message,
-                b.position.X * zoom,
-                (b.position.Y + 8) * zoom
+            let message : string[] = t.message.split('\n');
+            
+            let i = -1;
+            for(const line of message)
+            {
+                i++;
+                
+                if(line == '')
+                {
+                    continue;
+                }
+                
+                w.canvas.ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+                w.canvas.ctx.fillRect(
+                    (b.position.X - 2) * zoom,
+                    (b.position.Y - 2 + (12 * i)) * zoom,
+                    (320 - (2 * b.position.X) + 4) * zoom,
+                    12 * zoom
+                );
+                
+                w.canvas.ctx.fillStyle = t.color;
+                
+                w.canvas.ctx.fillText(
+                    line,
+                    b.position.X * zoom,
+                    (b.position.Y + 8 + (12 * i)) * zoom
+                );
+            }
+        }
+        
+        let f : Fader;
+        for(f of w.get('Fader'))
+        {
+            if(!f.active)
+            {
+                continue;
+            }
+            
+            w.canvas.ctx.fillStyle = `rgba(0, 0, 0, ${Math.round(f.faded * 5) / 5})`;
+            w.canvas.ctx.fillRect(
+                0,
+                0,
+                320 * zoom,
+                180 * zoom
             );
         }
     }

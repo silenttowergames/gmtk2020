@@ -16,5 +16,6 @@ export class TextC extends component
         return 'TextC';
     }
     
+    color : string = '#999';
     message : string;
 }
