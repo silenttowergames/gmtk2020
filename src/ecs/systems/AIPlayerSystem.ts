@@ -171,6 +171,8 @@ export class AIPlayerSystem extends system
                 )
                 {
                     w.nextScene = 'secondScene';
+                    
+                    window['sounds'].won.play();
                 }
             }
         }

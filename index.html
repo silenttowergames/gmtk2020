@@ -21,7 +21,17 @@ function onTileMapLoaded(name, data)
 }
 </script>
 <script type="text/javascript" src="dist/game.min.js"></script>
+<script type="text/javascript" src="howler.core.min.js"></script>
 <script type="text/javascript" src="assets/farm1.js"></script>
+<script type="text/javascript" src="assets/farm2.js"></script>
+<script type="text/javascript" src="assets/farm3.js"></script>
+<script type="text/javascript">
+window.sounds = {
+    won: new Howl({ src: [ 'assets/win.ogg', ], }),
+};
+
+Howler.volume(0.25);
+</script>
 <style type="text/css">
 @font-face {
     font-family: 'PressStart2P';
