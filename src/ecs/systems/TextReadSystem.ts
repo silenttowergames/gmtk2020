@@ -8,7 +8,14 @@ export class TextReadSystem extends system
 {
     update(w : world)
     {
-        const f = w.get('Fader')[0];
+        let f = w.get('Fader');
+        
+        if(!f.length)
+        {
+            return;
+        }
+        
+        f = f[0];
         
         if(f.active)
         {

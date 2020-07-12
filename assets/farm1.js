@@ -9,6 +9,13 @@
   module.exports = data;
  }})("farm1",
 { "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "target":"."
+        }
+    },
  "height":21,
  "infinite":false,
  "layers":[
@@ -39,6 +46,12 @@
  "nextlayerid":4,
  "nextobjectid":2,
  "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"nextScene",
+         "type":"string",
+         "value":"farm2"
+        }],
  "renderorder":"right-down",
  "tiledversion":"1.4.1",
  "tileheight":8,

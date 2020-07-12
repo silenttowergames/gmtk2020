@@ -72,7 +72,7 @@ function init() : void
     ];
     
     const scenes = {
-        firstScene: () => {
+        farm1: () => {
             let entity : number;
             
             entity = w.new();
@@ -86,7 +86,49 @@ function init() : void
             
             entity = w.new();
             w.add(entity, body.create(2, 2));
-            w.add(entity, TextC.create(`Spring 1953`));
+            w.add(entity, TextC.create(`Plant & Water`));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 128, 2));
+            w.add(entity, TextC.create(`Seed [X] Dig [C]`));
+        },
+        
+        farm2: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm2'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(33 * 8, (13 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Rows of Corn`));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 128, 2));
+            w.add(entity, TextC.create(`Seed [X] Dig [C]`));
+        },
+        
+        farm3: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm3'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(14 * 8, (5 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Bridge the Gap`));
             
             entity = w.new();
             w.add(entity, body.create(320 - 128, 2));
@@ -110,7 +152,7 @@ function init() : void
                 `pYou know I use my own seed every year.`,
                 `Just checking! You never know.\n\nHave a good one.`,
                 `pYou too!`,
-            ], 'secondYearStore'));
+            ], 'farm1'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -129,7 +171,7 @@ function init() : void
             w.add(entity, TextRead.create([
                 `Hey there Saul.\n\nHow'd the year go?`,
                 `pAbout as good as any other.\n\nNeed some more manure.`,
-                `Well, I got some bad news.\n\nLooks like your usual brand got put\nout. All we've got is this new kind.`,
+                `Well, I got some bad news.\nLooks like your usual brand got put\nout of business. All we've got is\nthis new kind.`,
                 `pOut of business? How's that?`,
                 `This new kind's cheap...\n\nSo cheap it seems wrong, in fact.\nNobody else can't compete.`,
                 `pWell... I guess I'll take it, if\nit's all you got.`,
@@ -145,7 +187,7 @@ function init() : void
                 `Well, I've got some new seeds here.\nSame brand, in fact.\n\nJust arrived this week.`,
                 `pConvenient.\n\nThere goes all the money I saved, I\nguess.`,
                 `You'll get 'em next year.`,
-            ], 'thirdYearStore'));
+            ], 'thirdYearBible'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -172,7 +214,7 @@ function init() : void
                 `pWhat am I supposed to do about the\nweeds?`,
                 `I hear they catch fire faster than\nanything else.\n\nDo with that what you may.`,
                 `Unrelated: we have a special going \non kerosene.`,
-            ], 'fourthYearStore'));
+            ], 'fourthYearBible'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -199,7 +241,7 @@ function init() : void
                 `They sell this extra-strength\nfertilizer.`,
                 `Says it'll make a seaweed grow\nin the desert.`,
                 `pI guess I'll take it...\n\nHow much?`,
-                `How expensive do you reckon it is to\nmake a seaweed grow in the\ndesert?`,
+                `How expensive do you reckon it is to\nmake a seaweed grow in the desert?`,
                 `That's how much.`,
                 `pWell, spare no expense.\n\nFarmers are made of money, after all.`,
                 `Yeah, I think all these new\nconcoctions...`,
@@ -207,7 +249,7 @@ function init() : void
                 `pI hate 'em as much as the next guy,\nbut that's what you said about the\ncredit card machine, too, Ed.`,
                 `Well I'm right one way or the other,\nain't I?`,
                 `pCan't argue with that, I guess.`,
-            ], 'fifthYearStore'));
+            ], 'fifthYearBible'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -244,7 +286,7 @@ function init() : void
                 `Great!\n\nJust sign here...`,
                 `pHere you go.`,
                 `Thank you. And,\n\nI'm sorry.`,
-            ], 'sixthYearStore'));
+            ], 'sixthYearBible'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -273,7 +315,7 @@ function init() : void
                `pWell, I need manure & seeds.`,
                `pAnd some of that severely overpriced\nstuff.`,
                `pAnd some kerosene, I guess.`,
-               `rSeverely over... ah!\n\nYou mean...`,
+               `rSeverely over- ah!\n\nYou mean...`,
                `pThe super-fertilizing... whatever.`,
                `rYes!\n\nIt'll make seaweed grow in the desert!`,
                `pAnd it made mushrooms grow on my\nshoes.`,
@@ -304,15 +346,86 @@ function init() : void
             w.add(entity, body.create(8, 128 - 24));
             w.add(entity, TextC.create(""));
             w.add(entity, TextRead.create([
-                //`12. The sleep of a labouring man is\nsweet, whether he eat little or much:\nbut the abundance of the rich will not\nsuffer him to sleep.\n    Ecclesiastes 5:12`,
-                `PLACEHOLDER`,
+                `18. [...] it is good and comely for\none to eat and to drink, and to enjoy\nthe good of all his labour that he\ntaketh under the sun all the days\nof his life [...]\n    Ecclesiastes 5:18`,
             ], 'firstYearStore'));
             
             entity = w.new();
             w.add(entity, new Fader());
         },
         
+        secondYearBible: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, body.create(0, 0));
+            w.add(entity, sprite.create(spriteSheets[1], 'only'));
+            
+            entity = w.new();
+            w.add(entity, body.create(8, 128 - 24));
+            w.add(entity, TextC.create(""));
+            w.add(entity, TextRead.create([
+                `12. The wicked plotteth against the\njust, and gnasheth upon him with his\nteeth.\n    Psalm 37:12`,
+            ], 'secondYearStore'));
+            
+            entity = w.new();
+            w.add(entity, new Fader());
+        },
+        
+        thirdYearBible: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, body.create(0, 0));
+            w.add(entity, sprite.create(spriteSheets[1], 'only'));
+            
+            entity = w.new();
+            w.add(entity, body.create(8, 128 - 24));
+            w.add(entity, TextC.create(""));
+            w.add(entity, TextRead.create([
+                `25. But while men slept, his enemy\ncame and sowed tares among the wheat,\nand went his way.\n    Matthew 13:25`,
+            ], 'thirdYearStore'));
+            
+            entity = w.new();
+            w.add(entity, new Fader());
+        },
+        
+        fourthYearBible: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, body.create(0, 0));
+            w.add(entity, sprite.create(spriteSheets[1], 'only'));
+            
+            entity = w.new();
+            w.add(entity, body.create(8, 128 - 24));
+            w.add(entity, TextC.create(""));
+            w.add(entity, TextRead.create([
+                `2. And the angel of the Lord appeared\nunto him in a flame of fire out of\nthe midst of a bush: and he looked,\nand, behold, the bush burned with\nfire, and the bush was not consumed.\n    Exodus 3:2`,
+            ], 'fourthYearStore'));
+            
+            entity = w.new();
+            w.add(entity, new Fader());
+        },
+        
         fifthYearBible: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, body.create(0, 0));
+            w.add(entity, sprite.create(spriteSheets[1], 'only'));
+            
+            entity = w.new();
+            w.add(entity, body.create(8, 128 - 24));
+            w.add(entity, TextC.create(""));
+            w.add(entity, TextRead.create([
+                `20. I cry unto thee, and thou dost not\nhear me: I stand up, and thou\nregardest me not.\n    Job 30:20`,
+            ], 'fifthYearStore'));
+            
+            entity = w.new();
+            w.add(entity, new Fader());
+        },
+        
+        sixthYearBible: () => {
             let entity : number;
             
             entity = w.new();
@@ -331,23 +444,44 @@ function init() : void
             entity = w.new();
             w.add(entity, new Fader());
         },
+        
+        ending: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, body.create(0, 0));
+            w.add(entity, sprite.create(spriteSheets[1], 'only'));
+            
+            entity = w.new();
+            w.add(entity, body.create(8, 128 - 24));
+            w.add(entity, TextC.create(""));
+            w.add(entity, TextRead.create([
+                `3. And the battle went sore against Saul,\n`,
+            ], 'ending'));
+            // , and the archers hit him; and he was sore wounded of the archers.
+            // 1 Samuel 31:3
+            
+            entity = w.new();
+            w.add(entity, new Fader());
+        },
     };
     
     let nextScene = null;
     
     const loop = setInterval(() => {
-        if((w == null && (nextScene = 'firstYearBible')) || (w.nextScene != null && (nextScene = w.nextScene)))
+        if((w == null && (nextScene = 'ending')) || (w.nextScene != null && (nextScene = w.nextScene)))
         {
             w = newWorld(c);
             
             w.spriteSheets = spriteSheets;
             
+            window['tiles'].index = [];
+            
             scenes[nextScene]();
             
             nextScene = null;
         }
-        
-        if(w.focused)
+        else if(w.focused)
         {
             w.progress();
             

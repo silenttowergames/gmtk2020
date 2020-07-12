@@ -147,6 +147,9 @@ export class AIPlayerSystem extends system
                             continue;
                         }
                         
+                        // Live Quietly And Work With Your Own Hands
+                        // 
+                        
                         const wia = [
                             i - 1,
                             i + 0,
@@ -177,21 +180,36 @@ export class AIPlayerSystem extends system
                 
                 a.actNow = !a.actNow;
                 
+                window['maps'][window['tiles'].currentMap].properties;
+                
                 if(
                     (window['maps'][window['tiles'].currentMap].layers[1].data.indexOf(5) == -1)
                     &&
                     (window['maps'][window['tiles'].currentMap].layers[1].data.indexOf(6) == -1)
                 )
                 {
-                    w.nextScene = 'secondScene';
+                    for(const property of window['maps'][window['tiles'].currentMap].properties)
+                    {
+                        if(property.name != 'nextScene')
+                        {
+                            continue;
+                        }
+                        
+                        w.nextScene = property.value;
+                    }
+                    
+                    if(w.nextScene == null)
+                    {
+                        throw new Error('No next scene!');
+                    }
                     
                     window['sounds'].won.play();
                 }
             }
             
-            if(water)
+            if(water && !dug)
             {
-                //window['sounds'].water.play();
+                window['sounds'].water.play();
             }
         }
     }
