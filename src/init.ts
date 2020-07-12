@@ -18,6 +18,7 @@ import { Fader } from "./ecs/components/Fader";
 import { FaderSystem } from "./ecs/systems/FaderSystem";
 import { Weed } from "./ecs/components/Weed";
 import { WeedSystem } from "./ecs/systems/WeedSystem";
+import { FireSystem } from "./ecs/systems/FireSystem";
 
 function init() : void
 {
@@ -208,6 +209,93 @@ function init() : void
             }
         },
         
+        farm7: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm7'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(30 * 8, (14 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 232, 2));
+            w.add(entity, TextC.create(`Kerosene [V] Seed [X] Dig [C]`, false));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Careful!`, false));
+            
+            for(const o of window['maps'].farm7.layers[2].objects)
+            {
+                entity = w.new();
+                w.add(entity, body.create(o.x, (o.y) + 12 - 8));
+                w.add(entity, sprite.create(spriteSheets[0], 'weed'));
+                w.add(entity, new Weed());
+            }
+        },
+        
+        farm8: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm8'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(21 * 8, (1 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 232, 2));
+            w.add(entity, TextC.create(`Kerosene [V] Seed [X] Dig [C]`, false));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Carefuler!`, false));
+            
+            for(const o of window['maps'].farm8.layers[2].objects)
+            {
+                entity = w.new();
+                w.add(entity, body.create(o.x, (o.y) + 12 - 8));
+                w.add(entity, sprite.create(spriteSheets[0], 'weed'));
+                w.add(entity, new Weed());
+            }
+        },
+        
+        farm9: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm9'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(2 * 8, (8 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 232, 2));
+            w.add(entity, TextC.create(`Kerosene [V] Seed [X] Dig [C]`, false));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Carefuler!`, false));
+            
+            for(const o of window['maps'].farm9.layers[2].objects)
+            {
+                entity = w.new();
+                w.add(entity, body.create(o.x, (o.y) + 12 - 8));
+                w.add(entity, sprite.create(spriteSheets[0], 'weed'));
+                w.add(entity, new Weed());
+            }
+        },
+        
         firstYearStore: () => {
             let entity : number;
             
@@ -260,7 +348,7 @@ function init() : void
                 `Well, I've got some new seeds here.\nSame brand, in fact.\n\nJust arrived this week.`,
                 `pConvenient.\n\nThere goes all the money I saved, I\nguess.`,
                 `You'll get 'em next year.`,
-            ], 'thirdYearBible'));
+            ], 'farm4'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -287,7 +375,7 @@ function init() : void
                 `pWhat am I supposed to do about the\nweeds?`,
                 `I hear they catch fire faster than\nanything else.\n\nDo with that what you may.`,
                 `Unrelated: we have a special going \non kerosene.`,
-            ], 'fourthYearBible'));
+            ], 'farm6'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -322,7 +410,7 @@ function init() : void
                 `pI hate 'em as much as the next guy,\nbut that's what you said about the\ncredit card machine, too, Ed.`,
                 `Well I'm right one way or the other,\nain't I?`,
                 `pCan't argue with that, I guess.`,
-            ], 'fifthYearBible'));
+            ], 'farm8'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -359,7 +447,7 @@ function init() : void
                 `Great!\n\nJust sign here...`,
                 `pHere you go.`,
                 `Thank you. And,\n\nI'm sorry.`,
-            ], 'sixthYearBible'));
+            ], 'farm10'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -402,7 +490,7 @@ function init() : void
                `rAnd yet...\n\t\nYou knew exactly who I was,\nthe moment you saw me.`,
                `rDidn't you?`,
                `rHave a nice day.`,
-            ], 'ending'));
+            ], 'farm12'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -555,7 +643,7 @@ function init() : void
     let nextScene = null;
     
     const loop = setInterval(() => {
-        if((w == null && (nextScene = 'farm6')) || (w.nextScene != null && (nextScene = w.nextScene)))
+        if((w == null && (nextScene = 'farm9')) || (w.nextScene != null && (nextScene = w.nextScene)))
         {
             w = newWorld(c);
             
@@ -587,6 +675,7 @@ function newWorld(c : canvas) : world
     
     w.canvas = c;
     w.systems.push(new AIPlayerSystem());
+    w.systems.push(new FireSystem());
     w.systems.push(new WeedSystem());
     w.systems.push(new MoveSystem());
     w.systems.push(new AnimationSystem());

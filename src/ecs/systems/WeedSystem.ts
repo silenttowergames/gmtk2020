@@ -2,6 +2,9 @@ import { system } from "../system";
 import { world } from "../world";
 import { body } from "../components/body";
 import { input } from "../../input";
+import { v2d } from "../../v2d";
+import { sprite } from "../components/sprite";
+import { Fire } from "../components/Fire";
 
 export class WeedSystem extends system
 {
@@ -31,9 +34,14 @@ export class WeedSystem extends system
                     continue;
                 }
                 
-                window['tiles'].index[b.index] = 0;
+                const entity = w.new();
+                w.add(entity, body.create(b.position.X, b.position.Y));
+                w.add(entity, sprite.create(w.spriteSheets[0], 'fire'));
+                w.add(entity, new Fire());
                 
-                remove.push(e);
+                window['fireSound'] = true;
+                
+                b.position = v2d.create(-512, -512);
             }
         }
         

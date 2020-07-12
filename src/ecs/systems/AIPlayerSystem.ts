@@ -78,9 +78,13 @@ export class AIPlayerSystem extends system
                 for(const i of ia)
                 {
                     if(
-                        window['maps'][window['tiles'].currentMap].layers[1].data[i] == 12
-                        ||
-                        window['maps'][window['tiles'].currentMap].layers[1].data[i] == 0
+                        (
+                            window['maps'][window['tiles'].currentMap].layers[1].data[i] == 12
+                            ||
+                            window['maps'][window['tiles'].currentMap].layers[1].data[i] == 0
+                        )
+                        &&
+                        !window['tiles'].index[i]
                     )
                     {
                         window['maps'][window['tiles'].currentMap].layers[1].data[i] = 18;
@@ -159,13 +163,21 @@ export class AIPlayerSystem extends system
                         
                         for(const j of wia)
                         {
-                            if(window['maps'][window['tiles'].currentMap].layers[1].data[j] == 18)
+                            if(
+                                window['maps'][window['tiles'].currentMap].layers[1].data[j] == 18
+                                &&
+                                (!window['tiles'].index[j])
+                            )
                             {
                                 window['maps'][window['tiles'].currentMap].layers[1].data[j] = 19;
                                 
                                 water = true;
                             }
-                            else if(window['maps'][window['tiles'].currentMap].layers[1].data[j] == 6)
+                            else if(
+                                window['maps'][window['tiles'].currentMap].layers[1].data[j] == 6
+                                &&
+                                (!window['tiles'].index[j])
+                            )
                             {
                                 window['maps'][window['tiles'].currentMap].layers[1].data[j] = 11;
                                 
