@@ -109,13 +109,16 @@ export class DrawSystem extends system
                     continue;
                 }
                 
-                w.canvas.ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
-                w.canvas.ctx.fillRect(
-                    (b.position.X - 2) * zoom,
-                    (b.position.Y - 2 + (12 * i)) * zoom,
-                    (320 - (2 * b.position.X) + 4) * zoom,
-                    12 * zoom
-                );
+                if(t.box)
+                {
+                    w.canvas.ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+                    w.canvas.ctx.fillRect(
+                        (b.position.X - 2) * zoom,
+                        (b.position.Y - 2 + (12 * i)) * zoom,
+                        (320 - (2 * b.position.X) + 4) * zoom,
+                        12 * zoom
+                    );
+                }
                 
                 w.canvas.ctx.fillStyle = t.color;
                 

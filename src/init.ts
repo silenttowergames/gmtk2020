@@ -16,6 +16,8 @@ import { TextRead } from "./ecs/components/TextRead";
 import { TextReadSystem } from "./ecs/systems/TextReadSystem";
 import { Fader } from "./ecs/components/Fader";
 import { FaderSystem } from "./ecs/systems/FaderSystem";
+import { Weed } from "./ecs/components/Weed";
+import { WeedSystem } from "./ecs/systems/WeedSystem";
 
 function init() : void
 {
@@ -135,6 +137,77 @@ function init() : void
             w.add(entity, TextC.create(`Seed [X] Dig [C]`));
         },
         
+        farm4: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm4'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(30 * 8, (3 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Hedge Maze`));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 128, 2));
+            w.add(entity, TextC.create(`Seed [X] Dig [C]`));
+        },
+        
+        farm5: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm5'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(1 * 8, (12 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 128, 2));
+            w.add(entity, TextC.create(`Seed [X] Dig [C]`, false));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Hedgier and Mazier`, false));
+        },
+        
+        farm6: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, TileMap.create('farm6'));
+            w.add(entity, body.create(0, 12));
+            
+            entity = w.new();
+            w.add(entity, new AIPlayer());
+            w.add(entity, body.create(30 * 8, (14 * 8) + 12));
+            w.add(entity, sprite.create(spriteSheets[0], 'protagLeft'));
+            
+            entity = w.new();
+            w.add(entity, body.create(320 - 232, 2));
+            w.add(entity, TextC.create(`Kerosene [V] Seed [X] Dig [C]`, false));
+            
+            entity = w.new();
+            w.add(entity, body.create(2, 2));
+            w.add(entity, TextC.create(`Weeds`, false));
+            
+            for(const o of window['maps'].farm6.layers[2].objects)
+            {
+                entity = w.new();
+                w.add(entity, body.create(o.x, (o.y) + 12 - 8));
+                w.add(entity, sprite.create(spriteSheets[0], 'weed'));
+                w.add(entity, new Weed());
+            }
+        },
+        
         firstYearStore: () => {
             let entity : number;
             
@@ -147,7 +220,7 @@ function init() : void
             w.add(entity, TextC.create(""));
             w.add(entity, TextRead.create([
                 `Welcome in, Saul!\n\nWhat is it you need?`,
-                `pHey there, Ed. I need some manure,\nand a new shovel.`,
+                `pHey there, Ed. I need some manure,\nand a new plow.`,
                 `Alrighty, here you go. No seed?`,
                 `pYou know I use my own seed every year.`,
                 `Just checking! You never know.\n\nHave a good one.`,
@@ -329,7 +402,7 @@ function init() : void
                `rAnd yet...\n\t\nYou knew exactly who I was,\nthe moment you saw me.`,
                `rDidn't you?`,
                `rHave a nice day.`,
-            ], 'firstYearBible'));
+            ], 'ending'));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -346,7 +419,7 @@ function init() : void
             w.add(entity, body.create(8, 128 - 24));
             w.add(entity, TextC.create(""));
             w.add(entity, TextRead.create([
-                `18. [...] it is good and comely for\none to eat and to drink, and to enjoy\nthe good of all his labour that he\ntaketh under the sun all the days\nof his life [...]\n    Ecclesiastes 5:18`,
+                `18. ... it is good and comely for\none to eat and to drink, and to enjoy\nthe good of all his labour that he\ntaketh under the sun all the days\nof his life ...\n    Ecclesiastes 5:18`,
             ], 'firstYearStore'));
             
             entity = w.new();
@@ -456,10 +529,23 @@ function init() : void
             w.add(entity, body.create(8, 128 - 24));
             w.add(entity, TextC.create(""));
             w.add(entity, TextRead.create([
-                `3. And the battle went sore against Saul,\n`,
-            ], 'ending'));
-            // , and the archers hit him; and he was sore wounded of the archers.
-            // 1 Samuel 31:3
+                `3. And the battle went sore against\nSaul, and the archers hit him; and\nhe was sore wounded of the archers.\n    1 Samuel 31:3`,
+            ], 'credits'));
+            
+            entity = w.new();
+            w.add(entity, new Fader());
+        },
+        
+        credits: () => {
+            let entity : number;
+            
+            entity = w.new();
+            w.add(entity, body.create(8, 8));
+            w.add(entity, TextC.create(""));
+            w.add(entity, TextRead.create([
+                `THE END\n\nUntitled\n\nSilent Tower Games LLC\n\nMade for GMTK Jam 2020\n"Out Of Control"\n\nProgramming, Design, Art, Audio by\nRetro Swan\n\nPlaytested By\nJakabob247, TwoWholeWorms`,
+                `Thanks For Playing! :)\n\nTwitter: @SilentTowerGame\n\nhttps://silent-tower-games.itch.io/\nhttps://silenttowergames.com/\nhttps://discord.silenttowergames.com/`
+            ], null));
             
             entity = w.new();
             w.add(entity, new Fader());
@@ -469,7 +555,7 @@ function init() : void
     let nextScene = null;
     
     const loop = setInterval(() => {
-        if((w == null && (nextScene = 'ending')) || (w.nextScene != null && (nextScene = w.nextScene)))
+        if((w == null && (nextScene = 'farm6')) || (w.nextScene != null && (nextScene = w.nextScene)))
         {
             w = newWorld(c);
             
@@ -501,6 +587,7 @@ function newWorld(c : canvas) : world
     
     w.canvas = c;
     w.systems.push(new AIPlayerSystem());
+    w.systems.push(new WeedSystem());
     w.systems.push(new MoveSystem());
     w.systems.push(new AnimationSystem());
     w.systems.push(new TextReadSystem());

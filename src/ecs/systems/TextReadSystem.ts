@@ -29,8 +29,11 @@ export class TextReadSystem extends system
             
             if(r.messageID >= r.messages.length)
             {
-                f.nextScene = r.nextScene;
-                f.active = true;
+                if(r.nextScene)
+                {
+                    f.nextScene = r.nextScene;
+                    f.active = true;
+                }
                 
                 continue;
             }

@@ -147,9 +147,6 @@ export class AIPlayerSystem extends system
                             continue;
                         }
                         
-                        // Live Quietly And Work With Your Own Hands
-                        // 
-                        
                         const wia = [
                             i - 1,
                             i + 0,
